@@ -17,8 +17,19 @@ public class CubeScrambler {
 		return POSSIBLE_MOVES[randomIndex];
 	}
 
-	protected char getFace(String move) {
-		//TODO return as a char which face is turned for a given move, i.e. return the first character of the String move
+	protected char getFace(String move){
+		return move.charAt(0);
+	}
+
+	public static final Map<Character, Character> scrambleDictionary = new HashMap<>();
+		static{
+			scrambleDictionary.put('U', 'D');
+			scrambleDictionary.put('D', 'U');
+			scrambleDictionary.put('R', 'L');
+			scrambleDictionary.put('L', 'R');
+			scrambleDictionary.put('F', 'B');
+			scrambleDictionary.put('B', 'F');
+		}
 	}
 
 	public String[] getScramble(int numMoves) {
