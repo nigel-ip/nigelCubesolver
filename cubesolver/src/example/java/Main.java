@@ -11,11 +11,8 @@ import com.pi4j.io.gpio.*;
 import java.util.Arrays;
 import java.util.concurrent.locks.LockSupport;
 
-
-
-
-public class Main {
-	public static void main(String[] args) throws IOException, InterruptedException {
+public class Main{
+	public static void main(String[] args) throws IOException, InterruptedException{
         Scanner scanner = new Scanner(System.in);
         String method = "B";
         String isScramblingCube = "Y";
@@ -23,27 +20,24 @@ public class Main {
 
         String cubeSolvingMethod;
 
-        //TODO create logic for retrieving arguments inputted from command line on raspberry pi5
+        //Create logic for retrieving arguments inputted from command line on raspberry pi5
 
-        if () {//TODO check that enough arguments were inputted, i.e. at least 3,
-            //TODO and check that the first argument is not null
-            method;//TODO assign to the method variable the string in the first argument
-            isScramblingCube;//TODO assign to the method variable the string in the second argument
-            if (){//TODO check that the third argument is not null
-                if(){//TODO check if the third argument is "Y" for yes
+        if ((args.length == 3) && (args[0] != null)){
+            method = args[0];
+            isScramblingCube = args[1];
+            if (args[2] != null){
+                if (args[2] == "Y"){.
                     autoTune = true;
-                    System.out.println("autoTuning");
+                    System.out.println("Autotuning");
                 }
             }
         }
 
-        if ("O".equalsIgnoreCase(method)) {
+        if ("O".equalsIgnoreCase(method)){
             cubeSolvingMethod = "Old Pochmann";
-        }
-        else if ("B".equalsIgnoreCase(method)) {
+        } else if ("B".equalsIgnoreCase(method)){
             cubeSolvingMethod = "Beginner";
-        }
-        else {
+        } else if ("K".equalsIgnoreCase(method)){
             cubeSolvingMethod = "Kociemba";
         }
 
@@ -54,8 +48,8 @@ public class Main {
         Motor frontMotor = new RohsStepperMotor(24, 25, 8, 7);
         Motor backMotor = new RohsStepperMotor(12, 16, 20, 21);
 
-         //DON'T USE, ONLY USE IF YOU AREN'T USING PCB, AND MANUALLY WIRING GPIOS
-//        Motor upMotor = new RohsStepperMotor (24, 25, 8, 7);
+//      DON'T USE, ONLY USE IF YOU AREN'T USING PCB, AND MANUALLY WIRING GPIOS
+//      Motor upMotor = new RohsStepperMotor (24, 25, 8, 7);
 //		Motor downMotor = new RohsStepperMotor (1, 12, 16, 20);
 //		Motor rightMotor = new RohsStepperMotor (21, 26, 19, 13);
 //		Motor leftMotor = new RohsStepperMotor (2, 3, 4, 17);
@@ -73,7 +67,6 @@ public class Main {
 //            robot.B();
 //        }
 
-
 //        System.exit(0);
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -90,9 +83,7 @@ public class Main {
             } catch(InterruptedException ignored){}
         }));
 
-
         System.out.println("Cube solving method: " + cubeSolvingMethod);
-
 
         CubeScrambler scrambler = new CubeScrambler(robot);
 
@@ -103,16 +94,15 @@ public class Main {
 
 		//String[] scrambleMoves = {"Ri","Bi","Ri","F2","L","F2","B","R","Ui","R","Fi","U","Li","B","L2","U2","B2","F2","L2","F"};
 
-        if ("Y".equalsIgnoreCase(isScramblingCube)) {
+        if ("Y".equalsIgnoreCase(isScramblingCube)){
 			String[] scrambleMoves = scrambler.getScramble(20);
 			System.out.println("------Scramble-------------");
-			for (String scrambleMove : scrambleMoves) {
+			for (String scrambleMove : scrambleMoves){
 				System.out.print(scrambleMove + ",");
 			}
             cubeColors = scrambler.scramble(scrambleMoves);
             Thread.sleep(5000);
-        }
-		else {
+        } else{
             Process preview = new ProcessBuilder(
                     "libcamera-hello",
                     "-t", "0"
@@ -130,7 +120,6 @@ public class Main {
             }
         }
 
-
         //char[][][] fixedCube = CubeFixer.fixCube(cubeColors);
 
         cube = new Cube(cubeColors);
@@ -140,28 +129,24 @@ public class Main {
 
         CubeSolvingMethod solver;
 
-        if ("Beginner".equalsIgnoreCase(cubeSolvingMethod)) {
+        if ("Beginner".equalsIgnoreCase(cubeSolvingMethod)){
             solver = new BeginnerMethod();
-        }
-		else if ("Kociemba".equalsIgnoreCase(cubeSolvingMethod)) {
+        } else if ("Kociemba".equalsIgnoreCase(cubeSolvingMethod)){
             solver = new KociembaAlgorithm();
-        }
-		else {
+        } else{
             solver = new OldPochmannMethod();
         }
 
 		String[] solution = solver.solve(cubeColors);
 
-
-
         System.out.println("------solution num moves: " + solution.length + "------------");
-        for (String s : solution) {
+        for (String s : solution){
             System.out.print(s + ",");
         }
         System.out.println();
         String[] simplifiedSolution = cube.simplifySolution(solution);
         System.out.println("------simplified solution num moves: " + simplifiedSolution.length + "------------");
-        for (String s : simplifiedSolution) {
+        for (String s : simplifiedSolution){
             System.out.print(s + ",");
         }
 
@@ -173,7 +158,5 @@ public class Main {
         robot.resetMotors();
 
         System.out.println("finished");
-
     }
-
 }

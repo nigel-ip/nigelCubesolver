@@ -4,18 +4,17 @@ import static org.cubexell.cubesolver.core.CubeConstants.POSSIBLE_MOVES;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CubeScrambler {
+public class CubeScrambler{
 	private Robot robot;
-	public CubeScrambler() {
+	public CubeScrambler(){
 	}
 
-	public CubeScrambler(Robot robot) {
+	public CubeScrambler(Robot robot){
 		this.robot = robot;
 	}
 
-	protected String randomScrambleMove() {
-		//TODO declare an int called randomIndex and assign to it a random value between 0 and 17
-		int randomIndex = ;//TODO assign a random value between 0 and 17 using Math.random(), and casting to int with (int)
+	protected String randomScrambleMove(){
+		int randomIndex = (int) (Math.random() * 18);
 		return POSSIBLE_MOVES[randomIndex];
 	}
 
@@ -86,7 +85,6 @@ public class CubeScrambler {
 			//scramble[i] = getScramble_Move;
 		//}
 	}
-
 	public char[][][] scramble(String[] scrambleMoves){
 	    Cube cube = new Cube(Helper.createSolvedCubeColors());
 		cube.simulateMoves(scrambleMoves);

@@ -315,42 +315,28 @@ public class OldPochmannMethod
 
 
     String getEdgeToBeSolved(){
-        char b = cube.cubeColors[UP_FACE_INDEX][1][2];//TODO: assign the color in the b spot to a character b
-        char m = cube.cubeColors[RIGHT_FACE_INDEX][0][1];//TODO: assign the color in the m spot to a character m
+        char b = cube.cubeColors[UP_FACE_INDEX][1][2];
+        char m = cube.cubeColors[RIGHT_FACE_INDEX][0][1];
         return String.valueOf(b) + String.valueOf(m);//return a combined string of the 2 characters, e.g. "WR", "BG", etc.
     }
 
 
     public void solveEdges() {
-        HashSet<String> unsolvedEdges = createUnsolvedEdges();//TODO: setup a HASHSET of all edges to solve by the name of unsovedEdges
-        while (unsolvedEdges.size()>0 && !cube.areEdgesSolved()) {//TODO: inside the parentheses, check if the #unsovled edges>0 AND if the edges are solved
-            System.out.println("num unsolved edges: " + unsolvedEdges.size());
-            String faceColor = getEdgeToBeSolved();//TODO: define a String named faceColor to be the edge in the buffer spot
-
-            System.out.println("faceColor: " + faceColor);
-            while (!"WR".equalsIgnoreCase(faceColor) && !"RW".equalsIgnoreCase(faceColor)) {
-                //TODO: execute the edge swap for the face color
+        HashSet<String> unsolvedEdges = createUnsolvedEdges();
+        while (unsolvedEdges.size() > 0) {
+            String faceColor = getEdgeToBeSolved();
+            while (!"WR".equalsIgnorecase(faceColor) && !"RW".equalsIgnoreCase(faceColor)){
                 executeEdgeSwap(faceColor, solution);
                 if (unsolvedEdges.contains(faceColor)) {
-                    unsolvedEdges.remove(faceColor);//then it removes that edge from the list
-                    unsolvedEdges.remove(cube.getReverseOfString(faceColor));
+                    unsolvedEdges.remove(faceColor);
+                    unsolvedEdges.remove(cube.getReversedOfString(faceColor));
                 }
-                faceColor = getEdgeToBeSolved();//TODO: assign the new edge in the buffer to the variable faceColor
-
-                System.out.println("faceColor: " + faceColor);
-                System.out.println("num unsolved edges: " + unsolvedEdges.size());
-                //if the next edge to solve is the buffer, it will exit this loop, otherwise, it repeats this process
+                faceColor = getEdgeToBeSolved()
             }
-            //if we are here, it means we have exited the previous loop, and that the buffer(white-red) is in its spot
             if (unsolvedEdges.size() > 0) {
-                System.out.println("new cycle, swapping with: " + unsolvedEdges.iterator().next());
-                System.out.println("number of unsolved edges: " + unsolvedEdges.size());
-                //TODO: execute edge swap with a random unsolved edge (hint: take the next value in unsolvedEdges)
+                executeEdgeSwap(unsolvedEdges.iterator.next(), solution);
             }
-            //check if edges are solved, if it is, exit loop, if not, repeat for the new cycle
         }
-        //if you're here, it means edges are done, and we can more on to corners
-        System.out.println("Done with edges..., unsolved edges: " + unsolvedEdges.size());
     }
 
     public void solveCorners() {
@@ -362,10 +348,10 @@ public class OldPochmannMethod
             char e = cube.cubeColors[LEFT_FACE_INDEX][0][0];
             String faceColor = String.valueOf(a) + String.valueOf(r) + String.valueOf(e);//gets the color of the corner in the buffer spot, to solve
             while (!"WBO".equalsIgnoreCase(faceColor) &&//loops through a cycle, and ends it once the buffer is in its spot
-                    !"OWB".equalsIgnoreCase(faceColor) &&
-                    !"BOW".equalsIgnoreCase(faceColor)){
+                   !"OWB".equalsIgnoreCase(faceColor) &&
+                   !"BOW".equalsIgnoreCase(faceColor)) {
                 executeCornerSwap(faceColor, solution);//does the corner swap for that specific edge
-                if (unsolvedCorners.contains(faceColor)){
+                if (unsolvedCorners.contains(faceColor)) {
                     unsolvedCorners.remove(faceColor);//then it removes that corner from the list
                     unsolvedCorners.remove(cube.otherCorner1(a,r,e));//along with its 2 other ones that are twisted versions of it
                     unsolvedCorners.remove(cube.otherCorner2(a,r,e));

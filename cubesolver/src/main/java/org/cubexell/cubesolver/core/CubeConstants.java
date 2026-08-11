@@ -19,7 +19,6 @@ public class CubeConstants {
                     'Y'
             };
 
-
     public static final String[] ROTATE_AROUND_CORNER = {"R", "Li", "F", "Bi","U", "Di", "R", "Li"};
     public static final String[] SEE_OPPOSITE_FACE_UP = {"F","B","R2","L2","Fi","Bi"};
     public static final String[] SEE_OPPOSITE_FACE_RIGHT = {"F","B","U2","D2","Fi","Bi"};
@@ -112,7 +111,7 @@ public class CubeConstants {
     public static final String[] REV_YRG = {"D","R"};
     public static final String[] YBR = {"D2","Fi"};
     public static final String[] REV_YBR = {"F","D2"};
-    public static final String[]  YOB = {"D","Fi"};
+    public static final String[] YOB = {"D","Fi"};
     public static final String[] REV_YOB = {"F","Di"};
 
     public static final String[] POSSIBLE_MOVES = {"R", "R2", "Ri", "L", "L2", "Li", "F", "F2", "Fi", "B", "B2", "Bi", "U", "U2", "Ui", "D", "D2", "Di"};
