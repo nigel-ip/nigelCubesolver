@@ -32,12 +32,31 @@ public class CubeScrambler {
 		}
 	}
 
-	public String[] getScramble(int numMoves) {
-		//TODO generate a random scramble with numMoves moves
-		//TODO ensure that no repetition of the turns with the same face, because that could be simplified into one turn
-
-
-
+	public String[] getScramble(int numMoves){
+		String[] scramble = new String[numMoves];
+		scramble[0] = randomScrambleMove();
+		String scrambleMove;
+		boolean getScrambleRepeat;
+		for (int i = 1, i < numMoves, i++){
+			getScrambleRepeat = true;
+			while (getScrambleRepeat){
+				scrambleMove = randomScrambleMove();
+				if (getFace(scrambleMove) != getFace(scramble[i - 1]){
+					if (i >= 2){
+						if ((getFace(scramble[i - 1]) == scrambleDictionary.get(getFace(scrambleMove)))){
+							if (getFace(scrambleMove) != getFace(scramble[i - 2])){
+								getScrambleRepeat = false;
+							}
+						} else{
+							getScrambleRepeat = false;
+						}
+					} else if (i == 1){
+						getScrambleRepeat = false;
+					}
+				}
+			}
+			scramble[i] = scrambleMove;
+		}
 
 
 		/*hint: declare and initialize a String array with length numMoves. Then, generate the first random move
