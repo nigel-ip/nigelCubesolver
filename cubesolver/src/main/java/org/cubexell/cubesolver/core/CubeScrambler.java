@@ -1,6 +1,8 @@
 package org.cubexell.cubesolver.core;
 
 import static org.cubexell.cubesolver.core.CubeConstants.POSSIBLE_MOVES;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CubeScrambler {
 	private Robot robot;
