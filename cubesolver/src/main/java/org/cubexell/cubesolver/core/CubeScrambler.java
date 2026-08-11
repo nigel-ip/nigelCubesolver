@@ -59,12 +59,30 @@ public class CubeScrambler {
 		}
 
 
-		/*hint: declare and initialize a String array with length numMoves. Then, generate the first random move
-		by calling randomScrambleMove(). Next, use a for loop to go through the rest of the moves, but resetting each
-		iteration if the face turned by a turn is the same as the previous turn (check using getFace(String move)).
-		Finally, return complete sequence of random moves.
-
-		 */
+		//String getScramble_Move;
+		//boolean getScramble_Repeat;
+		//for (i = 0, i < numMoves, i++) {
+			//getScramble_Repeat = true;
+			//while (getScramble_Repeat) {
+				//getScramble_Move = randomScrambleMove();
+				//if (scramble.length != 0) {
+					//int randomIndexTwo;
+					//for (i = 0, i < 18, i++) {
+						//if POSSIBLE_MOVES[i] == scramble[scramble.length - 1] {
+							//randomIndexTwo = i;
+						//}
+					//}
+					//randomIndex = (int) (randomIndex / 3);
+					//randomIndexTwo = (int) (randomIndexTwo / 3);
+					//if randomIndex != randomIndexTwo {
+						//getScramble_Repeat = !getScramble_Repeat;
+					//}
+				//} else {
+					//getScramble_Repeat = !getScramble_Repeat;
+				//}
+			//}
+			//scramble[i] = getScramble_Move;
+		//}
 	}
 
 	public char[][][] scramble(String[] scrambleMoves){
