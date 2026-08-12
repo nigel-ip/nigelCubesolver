@@ -24,7 +24,7 @@ public class CubeConstants {
     public static final String[] SEE_OPPOSITE_FACE_RIGHT = {"F","B","U2","D2","Fi","Bi"};
     public static final String[] SEE_OPPOSITE_FACE_FRONT = {"Ri","Li","U2","D2","R","L"};
     public static final String[] TPERM = {"R2","D","B2","Di","R2","F2","Di","L2","D","F2","Ui"};
-    public static final String[] CORNER_SWAP_ALGORITHM = {"R","Ui","Ri","Ui","R","U","Ri","Fi","R","U","Ri","Ui","Ri","F","R"};
+    public static final String[] CORNER_SWAP_ALGORITHM = {"R","U","R","U2","Li","Ri","U","R","Ui","L","U2","R2"};
     public static final String[] WB = {"R2","Ui","R2"};
     public static final String[] REV_WB = {"R2","U","R2"};
     public static final String[] WG = {"R2","U","R2"};
