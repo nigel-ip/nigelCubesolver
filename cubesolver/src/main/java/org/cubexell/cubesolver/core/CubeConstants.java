@@ -19,11 +19,11 @@ public class CubeConstants {
                     'Y'
             };
 
-    public static final String[] ROTATE_AROUND_CORNER = {"R", "Li", "F", "Bi","U", "Di", "R", "Li"};
+    public static final String[] ROTATE_AROUND_CORNER = {"R","Li","F","Bi","U","Di","R","Li"};
     public static final String[] SEE_OPPOSITE_FACE_UP = {"F","B","R2","L2","Fi","Bi"};
     public static final String[] SEE_OPPOSITE_FACE_RIGHT = {"F","B","U2","D2","Fi","Bi"};
     public static final String[] SEE_OPPOSITE_FACE_FRONT = {"Ri","Li","U2","D2","R","L"};
-    public static final String[] TPERM = {"R","U","Ri","Ui","Ri","F","R2","Ui","Ri","Ui","R","U","Ri","Fi"};
+    public static final String[] TPERM = {"R2","D","B2","Di","R2","F2","Di","L2","D","F2","Ui"};
     public static final String[] CORNER_SWAP_ALGORITHM = {"R","Ui","Ri","Ui","R","U","Ri","Fi","R","U","Ri","Ui","Ri","F","R"};
     public static final String[] WB = {"R2","Ui","R2"};
     public static final String[] REV_WB = {"R2","U","R2"};
@@ -69,8 +69,8 @@ public class CubeConstants {
     public static final String[] REV_YB = {"L2","Di"};
     public static final String[] YO = {"L2"};
     public static final String[] REV_YO = {"L2"};
-    //Check letter position a, then r, and then e(with corner in blue)
 
+    //Check letter position a, then r, and then e(with corner in blue)
     public static final String[] WRB = {"R","Di"};
     public static final String[] REV_WRB = {"D","Ri"};
     public static final String[] WGR = {"F"};
@@ -115,5 +115,4 @@ public class CubeConstants {
     public static final String[] REV_YOB = {"F","Di"};
 
     public static final String[] POSSIBLE_MOVES = {"R", "R2", "Ri", "L", "L2", "Li", "F", "F2", "Fi", "B", "B2", "Bi", "U", "U2", "Ui", "D", "D2", "Di"};
-
 }
