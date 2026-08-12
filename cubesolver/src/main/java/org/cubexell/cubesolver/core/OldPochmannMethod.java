@@ -124,7 +124,6 @@ public class OldPochmannMethod
             cube.recordMoves(solution, TPERM);
             cube.recordMoves(solution, REV_YO);
         }
-
     }
 
     public void executeCornerSwap(String faceColor, ArrayList<String> solution) {
@@ -236,7 +235,6 @@ public class OldPochmannMethod
         }
     }
 
-
     private void addUnsolvedEdge(HashSet<String> unsolvedEdges, String edge){
         if(!cube.isEdgeSolved(edge))
             unsolvedEdges.add(edge);
@@ -279,9 +277,6 @@ public class OldPochmannMethod
             unsolvedCorners.add(corner);
     }
 
-
-
-
     private HashSet<String> createUnsolvedCorners() {
         HashSet<String> unsolvedCorners = new HashSet<>(22);
         addUnsolvedCorner(unsolvedCorners, "WRB");
@@ -313,13 +308,11 @@ public class OldPochmannMethod
         return unsolvedCorners;
     }
 
-
     String getEdgeToBeSolved(){
         char b = cube.cubeColors[UP_FACE_INDEX][1][2];
         char m = cube.cubeColors[RIGHT_FACE_INDEX][0][1];
         return String.valueOf(b) + String.valueOf(m);//return a combined string of the 2 characters, e.g. "WR", "BG", etc.
     }
-
 
     public void solveEdges() {
         HashSet<String> unsolvedEdges = createUnsolvedEdges();
