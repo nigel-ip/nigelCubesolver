@@ -50,7 +50,7 @@ java {
 
 repositories {
     mavenCentral() // Add mavenCentral if not already present
-        flatDir {
+    flatDir {
         dirs 'libs'
     }
 }
