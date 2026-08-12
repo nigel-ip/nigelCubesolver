@@ -35,7 +35,7 @@ public class RohsStepperMotor implements Motor{
 
     int motorStepCounter = 0;
     public void doTurn(double stepsToTurn, boolean direction) throws InterruptedException {
-        for (i = 0, i < stepsToTurn, i++){
+        for (int i = ; i < stepsToTurn; i++){
             if stepSequence[motorStepCounter][1] ==  {
                 in2.low()
             } else{

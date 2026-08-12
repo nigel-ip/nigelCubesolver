@@ -38,7 +38,7 @@ public class CubeScrambler{
 		scramble[0] = randomScrambleMove();
 		String scrambleMove;
 		boolean getScrambleRepeat;
-		for (int i = 1, i < numMoves, i++){
+		for (int i = 1; i < numMoves; i++){
 			getScrambleRepeat = true;
 			while (getScrambleRepeat){
 				scrambleMove = randomScrambleMove();
