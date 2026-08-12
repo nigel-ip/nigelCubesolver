@@ -329,7 +329,7 @@ public class OldPochmannMethod
                 executeEdgeSwap(faceColor, solution);
                 if (unsolvedEdges.contains(faceColor)) {
                     unsolvedEdges.remove(faceColor);
-                    unsolvedEdges.remove(cube.getReversedOfString(faceColor));
+                    unsolvedEdges.remove(cube.getReverseOfString(faceColor));
                 }
                 faceColor = getEdgeToBeSolved()
             }
