@@ -31,18 +31,18 @@ public class CubeScrambler{
 			scrambleDictionary.put('F', 'B');
 			scrambleDictionary.put('B', 'F');
 		}
-	}
+
 
 	public String[] getScramble(int numMoves){
 		String[] scramble = new String[numMoves];
 		scramble[0] = randomScrambleMove();
-		String scrambleMove;
+		String scrambleMove = randomScrambleMove();
 		boolean getScrambleRepeat;
 		for (int i = 1; i < numMoves; i++){
 			getScrambleRepeat = true;
 			while (getScrambleRepeat){
 				scrambleMove = randomScrambleMove();
-				if (getFace(scrambleMove) != getFace(scramble[i - 1]){
+				if (getFace(scrambleMove) != getFace(scramble[i - 1])){
 					if (i >= 2){
 						if ((getFace(scramble[i - 1]) == scrambleDictionary.get(getFace(scrambleMove)))){
 							if (getFace(scrambleMove) != getFace(scramble[i - 2])){
@@ -59,6 +59,7 @@ public class CubeScrambler{
 			scramble[i] = scrambleMove;
 		}
 
+		return scramble;
 
 		//String getScramble_Move;
 		//boolean getScramble_Repeat;

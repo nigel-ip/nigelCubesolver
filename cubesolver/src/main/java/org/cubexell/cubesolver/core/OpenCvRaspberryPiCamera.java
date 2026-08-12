@@ -35,6 +35,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
     BufferedImage drawingImage;
     Graphics2D graphics;
 
+
     Robot robot;
 
     String outputImage = "cubeColors.jpg";//this will be the name of the image of the cube that is saved to the RaspberryPi
@@ -44,21 +45,27 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
         this.autoTune = autoTune;
     }
 
-    public void startup(){}
+    public void startup() {
 
-    public void shutdown(){}
+    }
 
-    public char[][][] inspect() throws InterruptedException{
+    public void shutdown() {
+
+    }
+
+    public char[][][] inspect() throws InterruptedException {
         if(!autoTune){
             readLabReferenceValues();
         }
+
         captureImage();
-        startDrawing();//draws and writes helpful info in the image file for tuning purposes
-        drawTuningGrid(200);//draws helpful tuning grid for rectangle coordinates
+        startDrawing();
+        drawTuningGrid(200);
+
         char[][][] cubeColors = new char[6][3][3];//creates a blank matrix of the cube
 
         System.out.println("Back Face");//tells which face the following colors are for
-        char[][] backFace = inspectBackFace('B');
+        char[][] backFace = inspectBackFace('B');//the 'B' is the center color, and it gets the colors of the rest of the pieces on the back face
         System.out.println();
 
         System.out.println("Left Face");
@@ -72,7 +79,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
         finishDrawing();
 
         robot.executeMoves(SEE_OPPOSITE_FACE_FRONT);//turns the cube so that the front face is on the back side of the cube, and therefore the camera can see the front face
-        outputImage = "cubeColorsF.jpg";//new name for the new picture
+        outputImage = "cubeColorsF.jpg";// new name for the new picture
         Thread.sleep(2000);
         captureImage();
         startDrawing();
@@ -118,6 +125,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
 
             inspectDownFace('B');
 
+
             robot.executeMoves(SEE_OPPOSITE_FACE_FRONT);
             outputImage = "tuningStuff1F.jpg";
             Thread.sleep(2000);
@@ -152,6 +160,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
 
             inspectDownFace('O');
 
+
             robot.executeMoves(SEE_OPPOSITE_FACE_FRONT);
             outputImage = "tuningStuff2F.jpg";
             Thread.sleep(2000);
@@ -177,130 +186,136 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
 
             saveLabReferenceValues(realReferenceColors);//write the values to file to be compared to later values instead of manually tuning each value
         }
+
         return cubeColors;
+
     }
 
     int offsetX = -100+50;
     int offsetY = -50;
 
-    public char[][] inspectBackFace(char center){
-        face = 0
-        piece = 0
-        color = convertFaceColorToIndex(center)
+    public char[][] inspectBackFace(char center) {
+        face = 0;
+        piece = 0;
+        color = convertFaceColorToIndex(center);
         return new char[][]{//returns a 2 dimensional array of the colors of the back face
-                {
-                    findColor(990+offsetX,730+offsetY,70,45),//gets the color of the top-left piece of the back face. coordinates are of the top-left corner, width, and height.
-                    findColor(1160+offsetX,550+offsetY,175,60),
-                    findColor(1550+offsetX,200+offsetY,150,100),
+                {//gets the color of the top-left piece of the back face. coordinates are of the top-left corner, width, and height.
+                        findColor(990+offsetX,730+offsetY,70,45),
+                        findColor(1160+offsetX,550+offsetY,175,60),
+                        findColor(1550+offsetX,200+offsetY,150,100),
                 },
                 {
-                    findColor(840+offsetX,1200+offsetY,120,150),
-                    center,
-                    findColor(1500+offsetX,650+offsetY,230,150)
+                        findColor(840+offsetX,1200+offsetY,120,150),
+                        center,
+                        findColor(1500+offsetX,650+offsetY,230,150)
                 },
                 {
-                    findColor(730+offsetX,1725+offsetY,120,125),
-                    findColor(1025+offsetX,1500+offsetY,150,150),
-                    findColor(1490+offsetX,1100+offsetY,220,300)
+                        findColor(730+offsetX,1725+offsetY,120,125),
+                        findColor(1025+offsetX,1500+offsetY,150,150),
+                        findColor(1490+offsetX,1100+offsetY,220,300)
                 },
         };
     }
 
-    public char[][] inspectLeftFace(char center){
-        face = 1
-        piece = 0
-        color = convertFaceColorToIndex(center)
+    public char[][] inspectLeftFace(char center) {
+        face = 1;
+        piece = 0;
+        color = convertFaceColorToIndex(center);
         return new char[][]{
                 {
-                    findColor(2000+offsetX,225+offsetY,150,100),
-                    findColor(2350+offsetX,530+offsetY,125,125),
-                    findColor(2620+offsetX,720+offsetY,70,50),
+                        findColor(2000+offsetX,225+offsetY,150,100),
+                        findColor(2350+offsetX,530+offsetY,125,125),
+                        findColor(2620+offsetX,720+offsetY,70,50),
                 },
                 {
-                    findColor(2000+offsetX,675+offsetY,225,170),
-                    center,
-                    findColor(2715+offsetX,1130+offsetY,100,200)
+                        findColor(2000+offsetX,675+offsetY,225,170),
+                        center,
+                        findColor(2715+offsetX,1130+offsetY,100,200)
                 },
                 {
-                    findColor(1920+offsetX,1180+offsetY,325,200),
-                    findColor(2425+offsetX,1450+offsetY,240,200),
-                    findColor(2815+offsetX,1580+offsetY,100,300)
+                        findColor(1920+offsetX,1180+offsetY,325,200),
+                        findColor(2425+offsetX,1450+offsetY,240,200),
+                        findColor(2815+offsetX,1580+offsetY,100,300)
                 },
         };
     }
 
-    public char[][] inspectDownFace(char center){
-        face = 2
-        piece = 0
-        color = convertFaceColorToIndex(center)
+    public char[][] inspectDownFace(char center) {
+        face = 2;
+        piece = 0;
+        color = convertFaceColorToIndex(center);
         return new char[][]{
                 {
-                    findColor(2560+offsetX,2065+offsetY,250,80),
-                    findColor(2120+offsetX,2170+offsetY,200,65),
-                    findColor(1940+offsetX,2265+offsetY,70,25),
+                        findColor(2560+offsetX,2065+offsetY,250,80),
+                        findColor(2120+offsetX,2170+offsetY,200,65),
+                        findColor(1940+offsetX,2265+offsetY,70,25),
                 },
                 {
-                    findColor(2165+offsetX,1900+offsetY,375,125),
-                    center,
-                    findColor(1400+offsetX,2175+offsetY,150,60)
+                        findColor(2165+offsetX,1900+offsetY,375,125),
+                        center,
+                        findColor(1400+offsetX,2175+offsetY,150,60)
                 },
                 {
-                    findColor(1590+offsetX,1650+offsetY,500,120),
-                    findColor(1230+offsetX,1870+offsetY,250,130),
-                    findColor(850+offsetX,2050+offsetY,200,60)
+                        findColor(1590+offsetX,1650+offsetY,500,120),
+                        findColor(1230+offsetX,1870+offsetY,250,130),
+                        findColor(850+offsetX,2050+offsetY,200,60)
                 },
         };
     }
 
-    public void captureImage(){
-        try{
-            ProcessBuilder processBuilder = new ProcessBuilder("libcamera-jpeg", "-o", outputImage, "--width", Integer.toString(imageWidth), "--height", Integer.toString(imageHeight), "--timeout", "1000");//this is basically running a command in terminal that takes a picture with these peramiters.
+
+    public void captureImage() {
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("libcamera-jpeg", "-o", outputImage, "--width", Integer.toString(imageWidth),
+                    "--height", Integer.toString(imageHeight), "--timeout", "1000");
+            //this is basically running a command in terminal that takes a picture with these parameters.
 
             Process process = processBuilder.start();
 
             int exitCode = process.waitFor();
 
-            if (exitCode == 0){//makes sure it was able to take the picture
+            if (exitCode == 0) {//makes sure it was able to take the picture
                 System.out.println("Image captured successfully: " + outputImage);
-            } else{
+            } else {
                 System.out.println("Error capturing image, exit code: " + exitCode);
             }
-        } catch (IOException | InterruptedException e){
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();//stops program if error occurs and shows where it happened
         }
     }
 
-    public char findColor(int squareX, int squareY, int squareWidth, int squareHeight){
+    public char findColor(int squareX, int squareY, int squareWidth, int squareHeight) {
         Mat image = imread(outputImage);
+
 
         boolean clipped = false;
 
         // Clip left/top edges
-        if (squareX < 0){
+        if (squareX < 0) {
             squareWidth += squareX;
             squareX = 0;
             clipped = true;
         }
 
-        if (squareY < 0){
+        if (squareY < 0) {
             squareHeight += squareY;
             squareY = 0;
             clipped = true;
         }
 
         // Clip right edge
-        if (squareX + squareWidth > imageWidth){
+        if (squareX + squareWidth > imageWidth) {
             squareWidth = imageWidth - squareX;
             clipped = true;
         }
 
         // Clip bottom edge
-        if (squareY + squareHeight > imageHeight){
+        if (squareY + squareHeight > imageHeight) {
             squareHeight = imageHeight - squareY;
             clipped = true;
         }
 
-        if (clipped){
+        if (clipped) {
             System.out.printf(
                     "Warning: ROI clipped to image bounds. New rectangle: x=%d y=%d w=%d h=%d (image=%dx%d)%n",
                     squareX, squareY, squareWidth, squareHeight,
@@ -308,7 +323,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
             );
         }
 
-        if (squareWidth <= 0 || squareHeight <= 0){
+        if (squareWidth <= 0 || squareHeight <= 0) {
             System.out.println("Error: ROI lies completely outside the image.");
             return 'U';
         }
@@ -319,10 +334,11 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
 
         drawSquare(squareX, squareY, squareWidth, squareHeight, color);
 
+
         return color;
     }
 
-    public static char classifyColor(Mat square){
+    public static char classifyColor(Mat square) {
 
         Mat labSquare = new Mat();//initializes a mat
         cvtColor(square, labSquare, COLOR_BGR2Lab);//converts the original square from BGR to LAB colorspace and saves it to labSquare
@@ -333,30 +349,37 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
 
         UByteIndexer indexer = labSquare.createIndexer();//creates an indexer that allows us to access the lab values of each pixel
 
-        for (int i = 0, i < labsquare.rows(), i++){
-            for (int j = 0, j <labSquare.cols(), j++){
-                int pixelL = indexer.get(i, j, 0);
-                int pixelA = indexer.get(i, j, 1);
-                int pixelB = indexer.get(i, j, 2);
-                listOfL.add(pixelL);
+        for (int row = 0; row < labSquare.rows(); row++) {//goes through every row
+            for (int col = 0; col < labSquare.cols(); col++) {//goes through every pixel in that row
+                int pixelL = indexer.get(row, col, 0);//gets the L value of that pixel
+                int pixelA = indexer.get(row, col, 1);
+                int pixelB = indexer.get(row, col, 2);
+
+                listOfL.add(pixelL);//add the value to the list
                 listOfA.add(pixelA);
                 listOfB.add(pixelB);
+
             }
+
         }
-        int medianL = getListMedian(listOfL);
+
+        int medianL = getListMedian(listOfL);//finds the median l value of all the pixels
         int medianA = getListMedian(listOfA);
         int medianB = getListMedian(listOfB);
 
         System.out.println("Median values: L: " + medianL + " A: " + medianA + " B: " + medianB);//prints out the final median values for tuning
 
-        char medianLabColor = classifyColorDeltaELab(medianL, medianA, ,medianB);
+        char medianLabColor = classifyColorDeltaELab(medianL, medianA, medianB);//gets what color the values represent
+
         System.out.println("Median color is: " + medianLabColor);//prints out the color
         System.out.println();
 
         return medianLabColor;//returns the final color
+
     }
 
     public static char classifyColorDeltaELab(int l, int a, int b){
+        // Real world values
         Map<Character, int[]> referenceColors = new HashMap<>();//this initializes a map that matches characters to an array of unique LAB values. Each character represents one of the colors on the cube, and each color may have multiple characters and therfore LAB values that deal with different lighting conditions.
 
         if(autoTune){
@@ -374,13 +397,14 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
             referenceColors.put('O', realReferenceColors[face][piece][LEFT_FACE_INDEX]);
         }
 
-        char bestColor = 'U';//Set to U so that if something goes wrong and no color is detected, U is returned to signify unknown
+        char bestColor = 'U';//Set to U so that if something goes wrong and no color is detected, U is returned to signify unkown
         double minDeltaE = Double.MAX_VALUE;//sets it to the maximum possible value that can be stored in a double so that it doesn't end up being less than the minimum distance from the reference color
+
         for(Map.Entry<Character, int[]> entry : referenceColors.entrySet()){//goes through all reference colors
             int[] ref = entry.getValue();//gets the LAB values from the reference color
-            double deltaE = Math.sqrt(Math.pow(l - /*TODO add the l value of the reference value*/, 2)/5 + Math.pow(a - /*TODO add the a value of the reference value*/, 2) + Math.pow(b - /*TODO add the b value of the reference value*/, 2));//uses the pythagorean theorem to calculate the distance of the actual color to the reference color
+            double deltaE = Math.sqrt(Math.pow(l - ref[0], 2)/5 + Math.pow(a - ref[1], 2) + Math.pow(b - ref[2], 2));//uses the pythagorean theorem to calculate the distance of the actual color to the reference color
             if (deltaE < minDeltaE){//if the distance is the least that has been tested so far
-                minDeltaE = deltaE;
+                minDeltaE = deltaE;//sets the new distance as the minimum
                 bestColor = entry.getKey();//sets the new color as the best color so far
             }
         }
@@ -411,8 +435,8 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
         }
         return bestColor;
     }
-    public void startDrawing(){
-        try{
+    public void startDrawing() {
+        try {
             drawingImage = ImageIO.read(new File(outputImage));
             graphics = drawingImage.createGraphics();
 
@@ -424,7 +448,8 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
         }
     }
 
-    public void finishDrawing(){
+
+    public void finishDrawing() {
         try {
             if(graphics != null) {
                 graphics.dispose();
@@ -438,8 +463,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
             e.printStackTrace();
         }
     }
-
-    public void drawTuningGrid(int gridWidth){
+    public void drawTuningGrid(int gridWidth) {
 
         graphics.setColor(Color.BLACK);
         graphics.setFont(new Font("TimesRoman", Font.BOLD, 25));
@@ -448,10 +472,10 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
         int rows = (int) Math.ceil((double) imageHeight / gridWidth);
 
         // vertical lines
-        for (int x = 0; x <= imageWidth; x += gridWidth){
+        for (int x = 0; x <= imageWidth; x += gridWidth) {
             graphics.drawLine(x, 0, x, imageHeight);
 
-            if (x < imageWidth){
+            if (x < imageWidth) {
                 graphics.drawString(
                         String.valueOf(x),
                         x + 5,
@@ -461,10 +485,10 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
         }
 
         // horizontal lines
-        for (int y = 0; y <= imageHeight; y += gridWidth){
+        for (int y = 0; y <= imageHeight; y += gridWidth) {
             graphics.drawLine(0, y, imageWidth, y);
 
-            if (y < imageHeight){
+            if (y < imageHeight) {
                 graphics.drawString(
                         String.valueOf(y),
                         5,
@@ -474,8 +498,8 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
         }
 
         // coordinate labels
-        for (int row = 0; row < rows; row++){
-            for (int col = 0; col < cols; col++){
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
 
                 int x = col * gridWidth;
                 int y = row * gridWidth;
@@ -488,7 +512,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
             }
         }
     }
-    public void drawSquare(int squareX, int squareY, int squareWidth, int squareHeight, char color){
+    public void drawSquare(int squareX, int squareY, int squareWidth, int squareHeight, char color) {
 
         graphics.setStroke(new BasicStroke(5)); // thickness in pixels
 
@@ -521,15 +545,15 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
     public static int convertFaceColorToIndex(char faceColor){
         if(faceColor == 'W'){
             return UP_FACE_INDEX;
-        } else if(faceColor == 'Y'){
+        }else if(faceColor == 'Y'){
             return DOWN_FACE_INDEX;
-        } else if(faceColor == 'G'){
+        }else if(faceColor == 'G'){
             return FRONT_FACE_INDEX;
-        } else if(faceColor == 'B'){
+        }else if(faceColor == 'B'){
             return BACK_FACE_INDEX;
-        } else if(faceColor == 'R'){
+        }else if(faceColor == 'R'){
             return RIGHT_FACE_INDEX;
-        } else{
+        }else{
             return LEFT_FACE_INDEX;
         }
     }
@@ -547,7 +571,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
             }
 
             System.out.println("Saved Lab Values to labValues.txt");
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -566,7 +590,7 @@ public class OpenCvRaspberryPiCamera implements CubeColorInspector{
                 realReferenceColors[i][j][k][2] = Integer.parseInt(parts[5]);
             }
             System.out.println("Loaded Lab values");
-        } catch (IOException e){
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
